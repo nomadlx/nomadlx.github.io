@@ -112,7 +112,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/Pseudo-Distributed/" style="font-size: 10px;">Pseudo-Distributed</a> <a href="/tags/Regular-Expression/" style="font-size: 10px;">Regular Expression</a> <a href="/tags/autoproxy/" style="font-size: 10px;">autoproxy</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/commad/" style="font-size: 15px;">commad</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goagent/" style="font-size: 10px;">goagent</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/learning/" style="font-size: 10px;">learning</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/skill/" style="font-size: 10px;">skill</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
 					</div>
 				</section>
 				
@@ -196,7 +196,7 @@
   
     <div class="article-meta">
       <a href="/2015/10/08/hello-world/" class="article-date">
-  	<time datetime="2015-10-08T08:39:31.344Z" itemprop="datePublished">2015-10-08</time>
+  	<time datetime="2015-10-08T10:51:30.467Z" itemprop="datePublished">2015-10-08</time>
 </a>
     </div>
   
@@ -251,6 +251,609 @@
 
 
   
+    <article id="post-ubuntu终端配色修改" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/21/ubuntu终端配色修改/" class="article-date">
+  	<time datetime="2015-03-21T15:25:46.000Z" itemprop="datePublished">2015-03-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/21/ubuntu终端配色修改/">ubuntu终端显示相关修改</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>和ubuntu终端显示有关的文件为~/.bashrc里的PS1，因此如果要修改相关的内容和颜色，则需要进行该文件的修改，所以首先用vim打开该文件，查看PS1原本的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS1=<span class="string">'$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '</span></span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>Are</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\t</td>
+<td>right-aligned</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td>centered</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td>are neat</td>
+</tr>
+</tbody>
+</table>
+<p>一下子看到这么一长串肯定是比较懵，不过可以在不修改原内容的情况下，在文件的末行添加下面的句子进行测试<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#自定义显示</span></span><br><span class="line"><span class="built_in">export</span> PS1=<span class="string">"<span class="variable">$&#123;debian_chroot:+($debian_chroot)&#125;</span>\[\033[01;33m\]→ \u☼ \t\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[01;36m\]\$ "</span></span><br></pre></td></tr></table></figure></p>
+<p>这个是我自己设置的显示</p>
+<p>先说几个常用的表示符</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\t</td>
+<td>当前时间</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>当前路径</td>
+</tr>
+<tr>
+<td>\u</td>
+<td>当前用户名</td>
+</tr>
+<tr>
+<td>\h</td>
+<td>当前主机名</td>
+</tr>
+</tbody>
+</table>
+<p>再来说一下颜色的设置<br>[\033[状态;颜色m]</p>
+<p>具体的状态代码（部分）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">00</td>
+<td style="text-align:center">正规</td>
+</tr>
+<tr>
+<td style="text-align:center">01</td>
+<td style="text-align:center">高亮显示</td>
+</tr>
+<tr>
+<td style="text-align:center">04</td>
+<td style="text-align:center">带下划线</td>
+</tr>
+</tbody>
+</table>
+<p>具体的颜色代码（部分）<br>00 【默认色，也就是终端设置的默认显示颜色】<br>30 【黑色】<br>31 【红色】<br>32 【绿色】<br>33 【黄色】<br>34 【蓝色】<br>35 【紫红色】<br>36 【青蓝色】<br>37 【白色】</p>
+<p>把颜色状态设置的语句放在具体的显示内容前面即可让该内容以该颜色和状态显示</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/terminal/">terminal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-正则表达式的学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/20/正则表达式的学习/" class="article-date">
+  	<time datetime="2015-03-20T14:01:15.000Z" itemprop="datePublished">2015-03-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/20/正则表达式的学习/">正则表达式的学习</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-hadoop2-6-0单机伪分布式安装和配置" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/17/hadoop2-6-0单机伪分布式安装和配置/" class="article-date">
+  	<time datetime="2015-03-17T12:31:44.000Z" itemprop="datePublished">2015-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/17/hadoop2-6-0单机伪分布式安装和配置/">hadoop2.6.0单机伪分布式安装和配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。<br>虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：</p>
+<p><blockquote class="blockquote-center">如果你做的一件事情是一帆风顺的，那它便可有可无。</blockquote><br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pseudo-Distributed/">Pseudo-Distributed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/install/">install</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/17/hadoop2-6-0单机伪分布式安装和配置/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu14-04小技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/15/ubuntu14-04小技巧/" class="article-date">
+  	<time datetime="2015-03-15T11:21:24.000Z" itemprop="datePublished">2015-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/ubuntu14-04小技巧/">ubuntu14.04小技巧</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##关闭访客模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/share/lightdm/lightdm.conf.d/<span class="number">50</span>-unity-greeter.conf</span><br></pre></td></tr></table></figure></p>
+<p>在最后面加上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">allow-guest=<span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<p>保存后重启，就无法访客模式登录了</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/skill/">skill</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/15/git常用命令/" class="article-date">
+  	<time datetime="2015-03-15T03:51:29.000Z" itemprop="datePublished">2015-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/git常用命令/">git常用命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##添加文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add</span><br></pre></td></tr></table></figure></p>
+<p>##提交更新<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure></p>
+<p>##查看状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure></p>
+<p>##添加远程仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin &lt;repo url&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##获取远程仓库内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin &lt;branch&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##把本地内容推送到远程仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;branch&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/commad/">commad</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu下常用shell命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/15/ubuntu下常用shell命令/" class="article-date">
+  	<time datetime="2015-03-15T03:29:31.000Z" itemprop="datePublished">2015-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/ubuntu下常用shell命令/">ubuntu下常用shell命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##程序安装和卸载命令</p>
+<p>###程序安装命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install [program name]</span><br></pre></td></tr></table></figure></p>
+<p>###程序卸载命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remomve [program name]</span><br></pre></td></tr></table></figure></p>
+<p>##压缩和解压缩文件命令</p>
+<p>###解压缩tar.gz文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf [filename]</span><br></pre></td></tr></table></figure></p>
+<p>-C &lt;路径名&gt; 解压到指定路径</p>
+<p>##查询程序所在目录命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">which</span> [program name]</span><br></pre></td></tr></table></figure></p>
+<p>##修改文件所属用户和组</p>
+<p>###修改文件所属用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown &lt;username&gt; &lt;filename&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###修改文件所属组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chgrp &lt;groupname&gt; &lt;filename&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/commad/">commad</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-使用Goagent-firefox-autoproxy快速实现翻墙" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/15/使用Goagent-firefox-autoproxy快速实现翻墙/" class="article-date">
+  	<time datetime="2015-03-15T03:26:08.000Z" itemprop="datePublished">2015-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/使用Goagent-firefox-autoproxy快速实现翻墙/">使用Goagent+firefox+autoproxy快速实现翻墙</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>翻墙应该算是日常不可少的一部分，不管是down外国论文还是下一些外国软件，当然也可以使用主流的一些社交网站如facebook、twitter等，这个翻墙的方法主要是基于最下面的第一篇文章进行实现，但是由于其教程是基于window平台，因此在一步上有一些差异。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autoproxy/">autoproxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/goagent/">goagent</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/15/使用Goagent-firefox-autoproxy快速实现翻墙/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-hexo静态博客书写样式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/15/hexo静态博客书写样式/" class="article-date">
+  	<time datetime="2015-03-15T03:17:33.000Z" itemprop="datePublished">2015-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/hexo静态博客书写样式/">hexo静态博客书写样式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##为文章添加多个标签<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tags: [tags1,tags2,...]</span><br></pre></td></tr></table></figure></p>
+<p>【注意】tags:后有个空格</p>
+<p>##代码高亮显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[```bash]</span><br><span class="line">需要高亮显示的部分</span><br><span class="line">[```]</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-使用hexo在github上搭建静态博客" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/15/使用hexo在github上搭建静态博客/" class="article-date">
+  	<time datetime="2015-03-15T02:29:00.000Z" itemprop="datePublished">2015-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/使用hexo在github上搭建静态博客/">使用hexo在github上搭建静态博客</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/15/使用hexo在github上搭建静态博客/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

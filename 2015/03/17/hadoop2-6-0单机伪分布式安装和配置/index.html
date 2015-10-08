@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hadoop2.6.0单机伪分布式安装和配置 | nomadlx的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：
+如果你做的一件事情是一帆风">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop2.6.0单机伪分布式安装和配置">
+<meta property="og:url" content="nomadlx.github.io/2015/03/17/hadoop2-6-0单机伪分布式安装和配置/index.html">
+<meta property="og:site_name" content="nomadlx的博客">
+<meta property="og:description" content="其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：
+如果你做的一件事情是一帆风">
+<meta property="og:updated_time" content="2015-03-23T06:24:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hadoop2.6.0单机伪分布式安装和配置">
+<meta name="twitter:description" content="其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：
+如果你做的一件事情是一帆风">
+  
+    <link rel="alternative" href="/atom.xml" title="nomadlx的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">nomadlx</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/nomadlx" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1727749662/home?wvr=5" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/nomadlx" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Pseudo-Distributed/" style="font-size: 10px;">Pseudo-Distributed</a> <a href="/tags/Regular-Expression/" style="font-size: 10px;">Regular Expression</a> <a href="/tags/autoproxy/" style="font-size: 10px;">autoproxy</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/commad/" style="font-size: 15px;">commad</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goagent/" style="font-size: 10px;">goagent</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/learning/" style="font-size: 10px;">learning</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/skill/" style="font-size: 10px;">skill</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我只是我…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">nomadlx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/face.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">nomadlx</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/nomadlx" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1727749662/home?wvr=5" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/nomadlx" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-hadoop2-6-0单机伪分布式安装和配置" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/17/hadoop2-6-0单机伪分布式安装和配置/" class="article-date">
+  	<time datetime="2015-03-17T12:31:44.000Z" itemprop="datePublished">2015-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hadoop2.6.0单机伪分布式安装和配置
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pseudo-Distributed/">Pseudo-Distributed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/install/">install</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。<br>虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：</p>
+<p><blockquote class="blockquote-center">如果你做的一件事情是一帆风顺的，那它便可有可无。</blockquote><br><a id="more"></a></p>
+<p>##添加hadoop用户</p>
+<p>###添加hadoop-group组<br>使用下面命令添加一个hadoop组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ addgroup hadoop-group</span><br></pre></td></tr></table></figure></p>
+<p>操作成功后会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Adding group `hadoop-group<span class="string">' (GID 1001) ...</span><br><span class="line">Done...</span></span><br></pre></td></tr></table></figure></p>
+<p>###添加hadoop用户并加入hadoop-group组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser --ingroup hadoop-group hadoop</span><br></pre></td></tr></table></figure></p>
+<p>操作成功后会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Adding user `hadoop<span class="string">' ...</span><br><span class="line">Adding new user `hadoop'</span> (<span class="number">1001</span>) with group `hadoop-group<span class="string">' ...</span><br><span class="line">Creating home directory `/home/hadoop'</span> ...</span><br><span class="line">Copying files from `/etc/skel<span class="string">' ...</span><br><span class="line">Enter new UNIX password:</span></span><br></pre></td></tr></table></figure></p>
+<p>根据提示输入hadoop用户的密码，敲回车<br>再重复输入hadoop用户密码，敲回车<br>成功后会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">passwd: password updated successfully</span><br><span class="line">Changing the user information <span class="keyword">for</span> hadoop</span><br><span class="line">Enter the new value, or press ENTER <span class="keyword">for</span> the default</span><br><span class="line">Changing the user information <span class="keyword">for</span> hadoop</span><br><span class="line">Enter the new value, or press ENTER <span class="keyword">for</span> the default</span><br><span class="line">	Full Name []: hadoop</span><br><span class="line">	Room Number []: </span><br><span class="line">	Work Phone []: </span><br><span class="line">	Home Phone []: </span><br><span class="line">	Other []: </span><br><span class="line">Is the information correct? [Y/n] y</span><br></pre></td></tr></table></figure></p>
+<p>过程中的停顿按照我上面的来输入，最后输入y回车，添加用户就成功了</p>
+<p>##切换到hadoop用户进行下列操作</p>
+<p>###方法一：直接在终端界面切换用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ su hadoop</span><br></pre></td></tr></table></figure></p>
+<p>按照提示输入hadoop用户的密码就可以切换到hadoop用户</p>
+<p>###方法二：在图形界面以hadoop用户登录<br>右上角的电源键按钮下拉，有直接切换账户的功能</p>
+<p>##为hadoop用户进行ssh的配置</p>
+<p>###命令行生成密钥对<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br></pre></td></tr></table></figure></p>
+<p>过程中的所有停顿直接回车，然后成功后会显示如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/hadoop/.ssh/id_rsa): </span><br><span class="line">Created directory <span class="string">'/home/hadoop/.ssh'</span>.</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/hadoop/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/hadoop/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line"><span class="number">26</span>:<span class="number">81</span>:b7:<span class="number">0</span>e:<span class="number">22</span>:<span class="number">92</span>:<span class="number">49</span>:<span class="number">0</span>f:ee:<span class="number">8</span>a:<span class="number">18</span>:ea:f7:<span class="number">24</span>:<span class="number">2</span>f:<span class="number">85</span> hadoop@LX-ubuntu</span><br><span class="line">The key<span class="string">'s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|                 |</span><br><span class="line">|     .           |</span><br><span class="line">| o  . o          |</span><br><span class="line">|ooo  . o         |</span><br><span class="line">|=...o o S        |</span><br><span class="line">|o. E + o         |</span><br><span class="line">|.. ....          |</span><br><span class="line">|=. o+            |</span><br><span class="line">|*.. oo           |</span><br><span class="line">+-----------------+</span></span><br></pre></td></tr></table></figure></p>
+<p>###复制公钥为authorized_keys<br>进入.ssh/目录中会看见两个文件：id_rsa、id_rsa.pub<br>输入下面命令将公钥id_rsa.pub复制为authorized_keys<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp id_rsa.pub authorized_keys</span><br></pre></td></tr></table></figure></p>
+<p>###进行无密码ssh连接测试<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh localhost</span><br></pre></td></tr></table></figure></p>
+<p>如果没有安装openssh，回车后会发现操作没有成功执行，而是提示如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host localhost port <span class="number">22</span>: Connection refused</span><br></pre></td></tr></table></figure></p>
+<p>输入命令查看是否由sshd进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps <span class="operator">-e</span>|grep ssh</span><br></pre></td></tr></table></figure></p>
+<p>如果没有sshd进程，则需要【切换到拥有sudoers权限的账户下】进行安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></p>
+<p>之后再进行ssh连接测试，如果成功显示如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host <span class="string">'localhost (127.0.0.1)'</span> can<span class="string">'t be established.</span><br><span class="line">ECDSA key fingerprint is 64:25:7c:a1:59:92:80:e6:a5:30:8e:a0:83:23:ac:f4.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added '</span>localhost<span class="string">' (ECDSA) to the list of known hosts.</span><br><span class="line">Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-46-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https://help.ubuntu.com/</span><br><span class="line"></span><br><span class="line">The programs included with the Ubuntu system are free software;</span><br><span class="line">the exact distribution terms for each program are described in the</span><br><span class="line">individual files in /usr/share/doc/*/copyright.</span><br><span class="line"></span><br><span class="line">Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by</span><br><span class="line">applicable law.</span></span><br></pre></td></tr></table></figure></p>
+<p>连接成功后退出，输入命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">exit</span></span><br></pre></td></tr></table></figure></p>
+<p>等到第二次进行ssh连接，一些警告信息会消失，如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Ubuntu <span class="number">14.04</span>.<span class="number">2</span> LTS (GNU/Linux <span class="number">3.13</span>.<span class="number">0</span>-<span class="number">46</span>-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https://help.ubuntu.com/</span><br><span class="line"></span><br><span class="line"><span class="number">0</span> packages can be updated.</span><br><span class="line"><span class="number">0</span> updates are security updates.</span><br><span class="line"></span><br><span class="line">Last login: Tue Mar <span class="number">17</span> <span class="number">21</span>:<span class="number">17</span>:<span class="number">18</span> <span class="number">2015</span> from localhost</span><br></pre></td></tr></table></figure></p>
+<p>##下载并安装hadoop2.6.0<br>到apache hadoop官网（<a href="http://hadoop.apache.org）可以进行hadoop-2.6.0.tar.gz安装文件的下载，实际上就是一个压缩包" target="_blank" rel="external">http://hadoop.apache.org）可以进行hadoop-2.6.0.tar.gz安装文件的下载，实际上就是一个压缩包</a></p>
+<p>###解压缩hadoop2.6.0.tar.gz文件到目录下<br>【切换到sudoer用户下】（如果要解压到系统目录中）进行解压操作，这里我将hadoop2.6.0.tar.gz文件解压到/usr/local/下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf hadoop-<span class="number">2.6</span>.<span class="number">0</span>.tar.gz -C /usr/<span class="built_in">local</span>/</span><br></pre></td></tr></table></figure></p>
+<p>###将hadoop2.6.0文件夹重命名为hadoop<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv hadoop-<span class="number">2.6</span>.<span class="number">0</span>/ hadoop/</span><br></pre></td></tr></table></figure></p>
+<p>###修改hadoop文件所属用户为hadoop<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown -R hadoop hadoop/</span><br></pre></td></tr></table></figure></p>
+<p>###修改hadoop文件所属组为hadoop-group<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chgrp -R hadoop-group hadoop/</span><br></pre></td></tr></table></figure></p>
+<p>##hadoop2.6.0相关文件的配置</p>
+<p>###hadoop-env.sh文件配置<br>用vi/vim打开hadoop下的etc/hadoop/hadoop-env.sh文件，把”export JAVA_HOME=“后面内容修改为你的jdk位置，保存并退出</p>
+<p>到这一步其实已经完成了hadoop单机的安装，单机是否安装成功可以参考最后的单机运行wordcount实例来判断</p>
+<p>###core-site.xml文件配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/usr/<span class="built_in">local</span>/hadoop/tmp&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://localhost:<span class="number">9000</span>&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###hdfs-site.xml文件配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/usr/<span class="built_in">local</span>/hadoop/dfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/usr/<span class="built_in">local</span>/hadoop/dfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;<span class="number">1</span>&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###mapred-site.xml文件配置<br>到这步大家会发现并没有mapred-site.xml这个文件，取而代之的是一个名为mapred-site.xml.template的文件，因此在这里需要增加一个拷贝的步骤<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp mapred-site.xml.template mapred-site.xml</span><br></pre></td></tr></table></figure></p>
+<p>拷贝完毕之后修改mapred-site.xml文件如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapred.job.tracker&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;localhost:<span class="number">9001</span>&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>###yarn-site.xml文件配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##相关准备以及启动/停止hadoop</p>
+<p>###格式化hdfs文件系统<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/hadoop namenode -format</span><br></pre></td></tr></table></figure></p>
+<p>如果操作成功，会看见status 0，如果看见的是status 1则操作失败</p>
+<p>###启动hadoop环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sbin/start-all.sh</span><br></pre></td></tr></table></figure></p>
+<p>可以在浏览器打开下面两个地址，来验证是否启动成功<br>1.<a href="http://localhost:50070" target="_blank" rel="external">http://localhost:50070</a><br>2.<a href="http://localhost:8088" target="_blank" rel="external">http://localhost:8088</a><br>也可以输入jsp查看各部件运行情况<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jps</span><br></pre></td></tr></table></figure></p>
+<p>如果输入jsp后提示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">The program <span class="string">'jps'</span> can be found <span class="keyword">in</span> the following packages:</span><br><span class="line"> * openjdk-<span class="number">7</span>-jdk</span><br><span class="line"> * openjdk-<span class="number">6</span>-jdk</span><br><span class="line">Ask your administrator to install one of them</span><br></pre></td></tr></table></figure></p>
+<p>这是因为该用户的java环境没有配置好，可以使用下面的命令来解决<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">alias</span> jps=<span class="string">'/usr/lib/java/bin/jps'</span></span><br></pre></td></tr></table></figure></p>
+<p>然后再输入jsp便会看见下面几个组件正在运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">20672</span> NameNode</span><br><span class="line"><span class="number">24081</span> Jps</span><br><span class="line"><span class="number">21058</span> SecondaryNameNode</span><br><span class="line"><span class="number">21254</span> ResourceManager</span><br><span class="line"><span class="number">21405</span> NodeManager</span><br><span class="line"><span class="number">20845</span> DataNode</span><br></pre></td></tr></table></figure></p>
+<p>###停止hadoop<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/stop-all.sh</span><br></pre></td></tr></table></figure></p>
+<p>##单机和伪分布式运行实例</p>
+<p>###单机运行wordcount实例<br>在hadoop文件夹下创建input文件夹，在文件夹下放入要进行wordcount的文本<br>然后执行如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-<span class="number">2.6</span>.<span class="number">0</span>.jar wordcount input output</span><br></pre></td></tr></table></figure></p>
+<p>成功运行显示如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO input.FileInputFormat: Total input paths to process : <span class="number">1</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapreduce.JobSubmitter: number of splits:<span class="number">1</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapreduce.JobSubmitter: Submitting tokens <span class="keyword">for</span> job: job_<span class="built_in">local</span>571613329_0001</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapreduce.Job: The url to track the job: http://localhost:<span class="number">8080</span>/</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapreduce.Job: Running job: job_<span class="built_in">local</span>571613329_0001</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: OutputCommitter <span class="built_in">set</span> <span class="keyword">in</span> config null</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: Waiting <span class="keyword">for</span> map tasks</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: Starting task: attempt_<span class="built_in">local</span>571613329_0001_m_000000_0</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: Processing split: file:/usr/<span class="built_in">local</span>/hadoop/input/hello:<span class="number">0</span>+<span class="number">48</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: (EQUATOR) <span class="number">0</span> kvi <span class="number">26214396</span>(<span class="number">104857584</span>)</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: mapreduce.task.io.sort.mb: <span class="number">100</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: soft <span class="built_in">limit</span> at <span class="number">83886080</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: bufstart = <span class="number">0</span>; bufvoid = <span class="number">104857600</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: kvstart = <span class="number">26214396</span>; length = <span class="number">6553600</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask<span class="variable">$MapOutputBuffer</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: </span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: Starting flush of map output</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: Spilling map output</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: bufstart = <span class="number">0</span>; bufend = <span class="number">92</span>; bufvoid = <span class="number">104857600</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: kvstart = <span class="number">26214396</span>(<span class="number">104857584</span>); kvend = <span class="number">26214356</span>(<span class="number">104857424</span>); length = <span class="number">41</span>/<span class="number">6553600</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.MapTask: Finished spill <span class="number">0</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.Task: Task:attempt_<span class="built_in">local</span>571613329_0001_m_000000_0 is done. And is <span class="keyword">in</span> the process of committing</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: map</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.Task: Task <span class="string">'attempt_local571613329_0001_m_000000_0'</span> done.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: Finishing task: attempt_<span class="built_in">local</span>571613329_0001_m_000000_0</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: map task executor complete.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: Waiting <span class="keyword">for</span> reduce tasks</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.LocalJobRunner: Starting task: attempt_<span class="built_in">local</span>571613329_0001_r_000000_0</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@<span class="number">6</span>b1d6655</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO reduce.MergeManagerImpl: MergerManager: memoryLimit=<span class="number">334338464</span>, maxSingleShuffleLimit=<span class="number">83584616</span>, mergeThreshold=<span class="number">220663392</span>, ioSortFactor=<span class="number">10</span>, memToMemMergeOutputsThreshold=<span class="number">10</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">43</span> INFO reduce.EventFetcher: attempt_<span class="built_in">local</span>571613329_0001_r_000000_0 Thread started: EventFetcher <span class="keyword">for</span> fetching Map Completion Events</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.LocalFetcher: localfetcher<span class="comment">#1 about to shuffle output of map attempt_local571613329_0001_m_000000_0 decomp: 83 len: 87 to MEMORY</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.InMemoryMapOutput: Read <span class="number">83</span> bytes from map-output <span class="keyword">for</span> attempt_<span class="built_in">local</span>571613329_0001_m_000000_0</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.MergeManagerImpl: closeInMemoryFile -&gt; map-output of size: <span class="number">83</span>, <span class="keyword">in</span>MemoryMapOutputs.size() -&gt; <span class="number">1</span>, commitMemory -&gt; <span class="number">0</span>, usedMemory -&gt;<span class="number">83</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.EventFetcher: EventFetcher is interrupted.. Returning</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.LocalJobRunner: <span class="number">1</span> / <span class="number">1</span> copied.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.MergeManagerImpl: finalMerge called with <span class="number">1</span> <span class="keyword">in</span>-memory map-outputs and <span class="number">0</span> on-disk map-outputs</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Merger: Merging <span class="number">1</span> sorted segments</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Merger: Down to the last merge-pass, with <span class="number">1</span> segments left of total size: <span class="number">79</span> bytes</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.MergeManagerImpl: Merged <span class="number">1</span> segments, <span class="number">83</span> bytes to disk to satisfy reduce memory <span class="built_in">limit</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.MergeManagerImpl: Merging <span class="number">1</span> files, <span class="number">87</span> bytes from disk</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO reduce.MergeManagerImpl: Merging <span class="number">0</span> segments, <span class="number">0</span> bytes from memory into reduce</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Merger: Merging <span class="number">1</span> sorted segments</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Merger: Down to the last merge-pass, with <span class="number">1</span> segments left of total size: <span class="number">79</span> bytes</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.LocalJobRunner: <span class="number">1</span> / <span class="number">1</span> copied.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Task: Task:attempt_<span class="built_in">local</span>571613329_0001_r_000000_0 is done. And is <span class="keyword">in</span> the process of committing</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.LocalJobRunner: <span class="number">1</span> / <span class="number">1</span> copied.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Task: Task attempt_<span class="built_in">local</span>571613329_0001_r_000000_0 is allowed to commit now</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO output.FileOutputCommitter: Saved output of task <span class="string">'attempt_local571613329_0001_r_000000_0'</span> to file:/usr/<span class="built_in">local</span>/hadoop/output/_temporary/<span class="number">0</span>/task_<span class="built_in">local</span>571613329_0001_r_000000</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.LocalJobRunner: reduce &gt; reduce</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.Task: Task <span class="string">'attempt_local571613329_0001_r_000000_0'</span> done.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.LocalJobRunner: Finishing task: attempt_<span class="built_in">local</span>571613329_0001_r_000000_0</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapred.LocalJobRunner: reduce task executor complete.</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapreduce.Job: Job job_<span class="built_in">local</span>571613329_0001 running <span class="keyword">in</span> uber mode : <span class="literal">false</span></span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapreduce.Job:  map <span class="number">100</span>% reduce <span class="number">100</span>%</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapreduce.Job: Job job_<span class="built_in">local</span>571613329_0001 completed successfully</span><br><span class="line"><span class="number">15</span>/<span class="number">03</span>/<span class="number">18</span> <span class="number">00</span>:<span class="number">32</span>:<span class="number">44</span> INFO mapreduce.Job: Counters: <span class="number">33</span></span><br><span class="line">	File System Counters</span><br><span class="line">		FILE: Number of bytes <span class="built_in">read</span>=<span class="number">541252</span></span><br><span class="line">		FILE: Number of bytes written=<span class="number">1047700</span></span><br><span class="line">		FILE: Number of <span class="built_in">read</span> operations=<span class="number">0</span></span><br><span class="line">		FILE: Number of large <span class="built_in">read</span> operations=<span class="number">0</span></span><br><span class="line">		FILE: Number of write operations=<span class="number">0</span></span><br><span class="line">	Map-Reduce Framework</span><br><span class="line">		Map input records=<span class="number">3</span></span><br><span class="line">		Map output records=<span class="number">11</span></span><br><span class="line">		Map output bytes=<span class="number">92</span></span><br><span class="line">		Map output materialized bytes=<span class="number">87</span></span><br><span class="line">		Input split bytes=<span class="number">99</span></span><br><span class="line">		Combine input records=<span class="number">11</span></span><br><span class="line">		Combine output records=<span class="number">8</span></span><br><span class="line">		Reduce input groups=<span class="number">8</span></span><br><span class="line">		Reduce shuffle bytes=<span class="number">87</span></span><br><span class="line">		Reduce input records=<span class="number">8</span></span><br><span class="line">		Reduce output records=<span class="number">8</span></span><br><span class="line">		Spilled Records=<span class="number">16</span></span><br><span class="line">		Shuffled Maps =<span class="number">1</span></span><br><span class="line">		Failed Shuffles=<span class="number">0</span></span><br><span class="line">		Merged Map outputs=<span class="number">1</span></span><br><span class="line">		GC time elapsed (ms)=<span class="number">0</span></span><br><span class="line">		CPU time spent (ms)=<span class="number">0</span></span><br><span class="line">		Physical memory (bytes) snapshot=<span class="number">0</span></span><br><span class="line">		Virtual memory (bytes) snapshot=<span class="number">0</span></span><br><span class="line">		Total committed heap usage (bytes)=<span class="number">525336576</span></span><br><span class="line">	Shuffle Errors</span><br><span class="line">		BAD_ID=<span class="number">0</span></span><br><span class="line">		CONNECTION=<span class="number">0</span></span><br><span class="line">		IO_ERROR=<span class="number">0</span></span><br><span class="line">		WRONG_LENGTH=<span class="number">0</span></span><br><span class="line">		WRONG_MAP=<span class="number">0</span></span><br><span class="line">		WRONG_REDUCE=<span class="number">0</span></span><br><span class="line">	File Input Format Counters </span><br><span class="line">		Bytes Read=<span class="number">48</span></span><br><span class="line">	File Output Format Counters </span><br><span class="line">		Bytes Written=<span class="number">61</span></span><br></pre></td></tr></table></figure></p>
+<p>之后输出output文件夹下的统计结果进行查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat output/*</span><br></pre></td></tr></table></figure></p>
+<p>###伪分布式运行wordcount实例<br>把要wordcount的文件夹put到hdfs分布式文件系统上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/hdfs dfs -put input /input</span><br></pre></td></tr></table></figure></p>
+<p>进行wordcount运算<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-<span class="number">2.6</span>.<span class="number">0</span>.jar wordcount /input /output</span><br></pre></td></tr></table></figure></p>
+<p>查看wordcount的结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/hdfs dfs -cat /output/*</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/20/正则表达式的学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          正则表达式的学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/15/ubuntu14-04小技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ubuntu14.04小技巧</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hadoop2-6-0单机伪分布式安装和配置" data-title="hadoop2.6.0单机伪分布式安装和配置" data-url="nomadlx.github.io/2015/03/17/hadoop2-6-0单机伪分布式安装和配置/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 nomadlx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

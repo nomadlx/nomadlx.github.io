@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | nomadlx的博客</title>
+  <title>ubuntu终端显示相关修改 | nomadlx的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="和ubuntu终端显示有关的文件为~/.bashrc里的PS1，因此如果要修改相关的内容和颜色，则需要进行该文件的修改，所以首先用vim打开该文件，查看PS1原本的内容1PS1=&apos;$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &apos;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="nomadlx.github.io/2015/10/08/hello-world/index.html">
+<meta property="og:title" content="ubuntu终端显示相关修改">
+<meta property="og:url" content="nomadlx.github.io/2015/03/21/ubuntu终端配色修改/index.html">
 <meta property="og:site_name" content="nomadlx的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta property="og:description" content="和ubuntu终端显示有关的文件为~/.bashrc里的PS1，因此如果要修改相关的内容和颜色，则需要进行该文件的修改，所以首先用vim打开该文件，查看PS1原本的内容1PS1=&apos;$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &apos;">
 <meta property="og:updated_time" content="2015-03-23T06:24:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="ubuntu终端显示相关修改">
+<meta name="twitter:description" content="和ubuntu终端显示有关的文件为~/.bashrc里的PS1，因此如果要修改相关的内容和颜色，则需要进行该文件的修改，所以首先用vim打开该文件，查看PS1原本的内容1PS1=&apos;$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &apos;">
   
     <link rel="alternative" href="/atom.xml" title="nomadlx的博客" type="application/atom+xml">
   
@@ -194,11 +191,11 @@ Quick">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ubuntu终端配色修改" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/08/hello-world/" class="article-date">
-  	<time datetime="2015-10-08T10:51:30.467Z" itemprop="datePublished">2015-10-08</time>
+      <a href="/2015/03/21/ubuntu终端配色修改/" class="article-date">
+  	<time datetime="2015-03-21T15:25:46.000Z" itemprop="datePublished">2015-03-21</time>
 </a>
     </div>
   
@@ -211,7 +208,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      ubuntu终端显示相关修改
     </h1>
   
 
@@ -219,6 +216,10 @@ Quick">
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/terminal/">terminal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -227,15 +228,84 @@ Quick">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>和ubuntu终端显示有关的文件为~/.bashrc里的PS1，因此如果要修改相关的内容和颜色，则需要进行该文件的修改，所以首先用vim打开该文件，查看PS1原本的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS1=<span class="string">'$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '</span></span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>Are</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\t</td>
+<td>right-aligned</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td>centered</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td>are neat</td>
+</tr>
+</tbody>
+</table>
+<p>一下子看到这么一长串肯定是比较懵，不过可以在不修改原内容的情况下，在文件的末行添加下面的句子进行测试<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#自定义显示</span></span><br><span class="line"><span class="built_in">export</span> PS1=<span class="string">"<span class="variable">$&#123;debian_chroot:+($debian_chroot)&#125;</span>\[\033[01;33m\]→ \u☼ \t\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[01;36m\]\$ "</span></span><br></pre></td></tr></table></figure></p>
+<p>这个是我自己设置的显示</p>
+<p>先说几个常用的表示符</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\t</td>
+<td>当前时间</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>当前路径</td>
+</tr>
+<tr>
+<td>\u</td>
+<td>当前用户名</td>
+</tr>
+<tr>
+<td>\h</td>
+<td>当前主机名</td>
+</tr>
+</tbody>
+</table>
+<p>再来说一下颜色的设置<br>[\033[状态;颜色m]</p>
+<p>具体的状态代码（部分）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">00</td>
+<td style="text-align:center">正规</td>
+</tr>
+<tr>
+<td style="text-align:center">01</td>
+<td style="text-align:center">高亮显示</td>
+</tr>
+<tr>
+<td style="text-align:center">04</td>
+<td style="text-align:center">带下划线</td>
+</tr>
+</tbody>
+</table>
+<p>具体的颜色代码（部分）<br>00 【默认色，也就是终端设置的默认显示颜色】<br>30 【黑色】<br>31 【红色】<br>32 【绿色】<br>33 【黄色】<br>34 【蓝色】<br>35 【紫红色】<br>36 【青蓝色】<br>37 【白色】</p>
+<p>把颜色状态设置的语句放在具体的显示内容前面即可让该内容以该颜色和状态显示</p>
 
       
     </div>
@@ -245,9 +315,18 @@ Quick">
     
 <nav id="article-nav">
   
+    <a href="/2015/10/08/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
   
-    <a href="/2015/03/21/ubuntu终端配色修改/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ubuntu终端显示相关修改</div>
+  
+    <a href="/2015/03/20/正则表达式的学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">正则表达式的学习</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -276,7 +355,7 @@ Quick">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="nomadlx.github.io/2015/10/08/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="ubuntu终端配色修改" data-title="ubuntu终端显示相关修改" data-url="nomadlx.github.io/2015/03/21/ubuntu终端配色修改/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
