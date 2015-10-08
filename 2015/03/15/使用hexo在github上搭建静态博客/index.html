@@ -11,7 +11,7 @@
 <meta property="og:url" content="nomadlx.github.io/2015/03/15/使用hexo在github上搭建静态博客/index.html">
 <meta property="og:site_name" content="nomadlx的博客">
 <meta property="og:description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。">
-<meta property="og:updated_time" content="2015-03-23T06:24:56.000Z">
+<meta property="og:updated_time" content="2015-10-08T17:24:02.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo在github上搭建静态博客">
 <meta name="twitter:description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。">
@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Pseudo-Distributed/" style="font-size: 10px;">Pseudo-Distributed</a> <a href="/tags/Regular-Expression/" style="font-size: 10px;">Regular Expression</a> <a href="/tags/autoproxy/" style="font-size: 10px;">autoproxy</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/commad/" style="font-size: 15px;">commad</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goagent/" style="font-size: 10px;">goagent</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/learning/" style="font-size: 10px;">learning</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/skill/" style="font-size: 10px;">skill</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+						<a href="/tags/Pseudo-Distributed/" style="font-size: 10px;">Pseudo-Distributed</a> <a href="/tags/autoproxy/" style="font-size: 10px;">autoproxy</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/commad/" style="font-size: 15px;">commad</a> <a href="/tags/config/" style="font-size: 10px;">config</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/goagent/" style="font-size: 10px;">goagent</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/install/" style="font-size: 10px;">install</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/skill/" style="font-size: 10px;">skill</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
 					</div>
 				</section>
 				
@@ -231,15 +231,14 @@
         <p>之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。</p>
 <a id="more"></a>
 <p>【注意】本文假设在各位的电脑上已经安装了git</p>
-<p>##安装Nodejs</p>
-<p>###在安装Nodejs之前需要借助nvm来进行安装，因此这里先进行nvm的安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">24.0</span>/install.sh | bash</span><br></pre></td></tr></table></figure></p>
-<p>###安装完nvm之后，可以使用nvm来方便地进行Nodejs的安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure></p>
-<p>##安装hexo<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p>
-<p>##初始化hexo文件夹<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ hexo init</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
-<p>##配置_config文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: &lt;repository url&gt;</span><br><span class="line">  branch: [branch]</span><br><span class="line">  message: [message]</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装Nodejs">安装Nodejs</h2><h3 id="在安装Nodejs之前需要借助nvm来进行安装，因此这里先进行nvm的安装">在安装Nodejs之前需要借助nvm来进行安装，因此这里先进行nvm的安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">24.0</span>/install.sh | bash</span><br></pre></td></tr></table></figure>
+<h3 id="安装完nvm之后，可以使用nvm来方便地进行Nodejs的安装">安装完nvm之后，可以使用nvm来方便地进行Nodejs的安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装hexo">安装hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h2 id="初始化hexo文件夹">初始化hexo文件夹</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ hexo init</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<h2 id="配置_config文件">配置_config文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: &lt;repository url&gt;</span><br><span class="line">  branch: [branch]</span><br><span class="line">  message: [message]</span><br></pre></td></tr></table></figure>
 <p>【注意】<repository url=""> 必须是ssh连接方式而不可以是http，即git@github.com:<your repository="" url=""></your></repository></p>
-<p>##安装hexo-deployer-git<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
-<p>主要参考来自：<br><a href="http://hexo.io/docs/" target="_blank" rel="external">http://hexo.io/docs/</a> 【hexo官方文档】<br><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a> 【nvm开源项目之README.markdown】<br><a href="http://blog.maxwi.com/2014/02/22/first-post/" target="_blank" rel="external">http://blog.maxwi.com/2014/02/22/first-post/</a> 【Ubuntu+hexo+github搭建个人博客环境及hexo配置】（主要解决npm命令不存在问题）<br><a href="http://www.cnblogs.com/zhcncn/p/4097881.html" target="_blank" rel="external">http://www.cnblogs.com/zhcncn/p/4097881.html</a> 【Hexo搭建Github静态博客】（主要解决仓库url地址填写问题）</p>
+<h2 id="安装hexo-deployer-git">安装hexo-deployer-git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<h2 id="主要参考来自：">主要参考来自：</h2><p><a href="http://hexo.io/docs/" target="_blank" rel="external">http://hexo.io/docs/</a> 【hexo官方文档】<br><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a> 【nvm开源项目之README.markdown】<br><a href="http://blog.maxwi.com/2014/02/22/first-post/" target="_blank" rel="external">http://blog.maxwi.com/2014/02/22/first-post/</a> 【Ubuntu+hexo+github搭建个人博客环境及hexo配置】（主要解决npm命令不存在问题）<br><a href="http://www.cnblogs.com/zhcncn/p/4097881.html" target="_blank" rel="external">http://www.cnblogs.com/zhcncn/p/4097881.html</a> 【Hexo搭建Github静态博客】（主要解决仓库url地址填写问题）</p>
 
       
     </div>
@@ -258,11 +257,6 @@
       </div>
     </a>
   
-  
-    <a href="/2015/03/15/在ubuntu14-04上安装并使用git/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">在ubuntu14.04上安装并使用git</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
   
 </nav>
 
