@@ -3,18 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ubuntu下常用shell命令 | nomadlx的博客</title>
+  <title>兔子繁殖（Fibonacci数列）问题的理解 | nomadlx的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="主要用来记录常用的shell命令">
+  <meta name="description" content="Fibonacci在《算盘书》中提出了一个有趣的兔子繁殖问题：
+
+一般而言，兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生出一对小兔子来。如果所有兔都不死，那么一年以后可以繁殖多少对兔子？
+
+一提到这个经典的问题，大家立刻知道它的答案就是著名的Fibonacci数列，而针对这个问题大家更多地是手工地计算出前几个月的兔子数量，然后从中找规律，发现f(n)=f(n-1)+f(n-2)。
+但是其实">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu下常用shell命令">
-<meta property="og:url" content="nomadlx.github.io/2015/03/15/ubuntu下常用shell命令/index.html">
+<meta property="og:title" content="兔子繁殖（Fibonacci数列）问题的理解">
+<meta property="og:url" content="nomadlx.github.io/2015/10/26/兔子繁殖（Fibonacci数列）问题的理解/index.html">
 <meta property="og:site_name" content="nomadlx的博客">
-<meta property="og:description" content="主要用来记录常用的shell命令">
-<meta property="og:updated_time" content="2015-10-26T11:12:15.705Z">
+<meta property="og:description" content="Fibonacci在《算盘书》中提出了一个有趣的兔子繁殖问题：
+
+一般而言，兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生出一对小兔子来。如果所有兔都不死，那么一年以后可以繁殖多少对兔子？
+
+一提到这个经典的问题，大家立刻知道它的答案就是著名的Fibonacci数列，而针对这个问题大家更多地是手工地计算出前几个月的兔子数量，然后从中找规律，发现f(n)=f(n-1)+f(n-2)。
+但是其实">
+<meta property="og:updated_time" content="2015-10-26T11:37:05.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu下常用shell命令">
-<meta name="twitter:description" content="主要用来记录常用的shell命令">
+<meta name="twitter:title" content="兔子繁殖（Fibonacci数列）问题的理解">
+<meta name="twitter:description" content="Fibonacci在《算盘书》中提出了一个有趣的兔子繁殖问题：
+
+一般而言，兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生出一对小兔子来。如果所有兔都不死，那么一年以后可以繁殖多少对兔子？
+
+一提到这个经典的问题，大家立刻知道它的答案就是著名的Fibonacci数列，而针对这个问题大家更多地是手工地计算出前几个月的兔子数量，然后从中找规律，发现f(n)=f(n-1)+f(n-2)。
+但是其实">
   
     <link rel="alternative" href="/atom.xml" title="nomadlx的博客" type="application/atom+xml">
   
@@ -191,11 +206,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ubuntu下常用shell命令" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-兔子繁殖（Fibonacci数列）问题的理解" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/03/15/ubuntu下常用shell命令/" class="article-date">
-  	<time datetime="2015-03-15T03:29:31.000Z" itemprop="datePublished">2015-03-15</time>
+      <a href="/2015/10/26/兔子繁殖（Fibonacci数列）问题的理解/" class="article-date">
+  	<time datetime="2015-10-26T11:27:40.000Z" itemprop="datePublished">2015-10-26</time>
 </a>
     </div>
   
@@ -208,7 +223,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ubuntu下常用shell命令
+      兔子繁殖（Fibonacci数列）问题的理解
     </h1>
   
 
@@ -217,7 +232,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/manual/">manual</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漫谈/">漫谈</a></li></ul>
 	</div>
 
         
@@ -228,14 +243,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>主要用来记录常用的shell命令<br><a id="more"></a></p>
-<h2 id="程序安装和卸载命令">程序安装和卸载命令</h2><h3 id="程序安装命令">程序安装命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install [program name]</span><br></pre></td></tr></table></figure>
-<h3 id="程序卸载命令">程序卸载命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remomve [program name]</span><br></pre></td></tr></table></figure>
-<h2 id="压缩和解压缩文件命令">压缩和解压缩文件命令</h2><h3 id="解压缩tar-gz文件">解压缩tar.gz文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf [filename]</span><br></pre></td></tr></table></figure>
-<p>-C &lt;路径名&gt; 解压到指定路径</p>
-<h2 id="查询程序所在目录命令">查询程序所在目录命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">which</span> [program name]</span><br></pre></td></tr></table></figure>
-<h2 id="修改文件所属用户和组">修改文件所属用户和组</h2><h3 id="修改文件所属用户">修改文件所属用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown &lt;username&gt; &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改文件所属组">修改文件所属组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chgrp &lt;groupname&gt; &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+        <p>Fibonacci在《算盘书》中提出了一个有趣的兔子繁殖问题：</p>
+<blockquote>
+<p>一般而言，兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生出一对小兔子来。如果所有兔都不死，那么一年以后可以繁殖多少对兔子？</p>
+</blockquote>
+<p>一提到这个经典的问题，大家立刻知道它的答案就是著名的Fibonacci数列，而针对这个问题大家更多地是手工地计算出前几个月的兔子数量，然后从中找规律，发现<code>f(n)=f(n-1)+f(n-2)</code>。</p>
+<p>但是其实针对这个答案可以有更好的理解方式：<br>式子一 <code>这个月的兔子对数=上个月的兔子对数+这个月具有繁殖能力的兔子对数</code><br>式子二 <code>这个月具有繁殖能力的兔子对数=上上个月的兔子对数</code><br>把式子二代入式子一里，便可以轻易地得出式子三，如下：<br><code>这个月的兔子对数=上个月的兔子对数+上上个月的兔子对数</code><br>也就是：<br><code>f(n)=f(n-1)+f(n-2)</code></p>
 
       
     </div>
@@ -245,18 +258,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/03/15/git常用命令/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          git常用命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/03/15/使用Goagent-firefox-autoproxy快速实现翻墙/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">使用Goagent+firefox+autoproxy快速实现翻墙</div>
+    <a href="/2015/10/26/对同步-异步的理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">对同步/异步的理解</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -285,7 +289,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ubuntu下常用shell命令" data-title="ubuntu下常用shell命令" data-url="nomadlx.github.io/2015/03/15/ubuntu下常用shell命令/"></div>
+	<div class="ds-thread" data-thread-key="兔子繁殖（Fibonacci数列）问题的理解" data-title="兔子繁殖（Fibonacci数列）问题的理解" data-url="nomadlx.github.io/2015/10/26/兔子繁殖（Fibonacci数列）问题的理解/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
