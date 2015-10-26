@@ -223,17 +223,7 @@
 <li><strong>读取文件：</strong>读取文件的实质是将在硬盘上的数据复制到内存里，而这一操作的执行者并不是cpu，而是磁盘控制器。</li>
 <li><strong>发送http请求：</strong>当线程执行发送请求之后，就是网络里的传输问题了，并不需要cpu的操作。</li>
 </ol>
-<p>所以存在异步/同步调用的地方，<em>本身该任务的完成就不是该线程来做的</em>。<br>所谓的同步，不过就是 <em>不做事在这里等该任务处理完成</em>。</p>
-<p>更形象点的说法：</p>
-<blockquote>
-<p>假设cpu是一个人，I/O控制器也是一个人，所谓的线程的调度等同于一个人处理多个任务，而异步/同步调用是一个人（cpu）命令另一个人（I/O控制器）去做一件事。</p>
-<ul>
-<li><strong>在异步的情况下</strong>：我（cpu）并不等那个人（I/O控制器）完成任务才处理后面的事情，而是一分配完任务就干自己的其他事情了；</li>
-<li><strong>在同步的情况下</strong>：我（cpu）就在这里等到那个人（I/O控制器）处理完我分配的任务，然后才干后面的事情。</li>
-</ul>
-</blockquote>
-<p><a href="http://www.zhihu.com/question/36786066/answer/69360466" target="_blank" rel="external">来自我的知乎回答</a></p>
-
+<p>所以存在异步/同步调用的地方，<em>本身该任务的完成就不是该线程来做的</em>。<br>所谓的同步，不过就是 <em>不做事在这里等该任务处理完成</em>。<br>
       
     </div>
     
@@ -246,6 +236,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/10/26/对同步-异步的理解/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -400,84 +394,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>和ubuntu终端显示有关的文件为~/.bashrc里的PS1，因此如果要修改相关的内容和颜色，则需要进行该文件的修改，所以首先用vim打开该文件，查看PS1原本的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS1=<span class="string">'$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '</span></span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>Are</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\t</td>
-<td>right-aligned</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td>centered</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td>are neat</td>
-</tr>
-</tbody>
-</table>
-<p>一下子看到这么一长串肯定是比较懵，不过可以在不修改原内容的情况下，在文件的末行添加下面的句子进行测试<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义显示</span></span><br><span class="line"><span class="built_in">export</span> PS1=<span class="string">"<span class="variable">$&#123;debian_chroot:+($debian_chroot)&#125;</span>\[\033[01;33m\]→ \u☼ \t\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[01;36m\]\$ "</span></span><br></pre></td></tr></table></figure></p>
-<p>这个是我自己设置的显示</p>
-<p>先说几个常用的表示符</p>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>表示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\t</td>
-<td>当前时间</td>
-</tr>
-<tr>
-<td>\w</td>
-<td>当前路径</td>
-</tr>
-<tr>
-<td>\u</td>
-<td>当前用户名</td>
-</tr>
-<tr>
-<td>\h</td>
-<td>当前主机名</td>
-</tr>
-</tbody>
-</table>
-<p>再来说一下颜色的设置<br>[\033[状态;颜色m]</p>
-<p>具体的状态代码（部分）</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">代码</th>
-<th style="text-align:center">表示</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">00</td>
-<td style="text-align:center">正规</td>
-</tr>
-<tr>
-<td style="text-align:center">01</td>
-<td style="text-align:center">高亮显示</td>
-</tr>
-<tr>
-<td style="text-align:center">04</td>
-<td style="text-align:center">带下划线</td>
-</tr>
-</tbody>
-</table>
-<p>具体的颜色代码（部分）<br>00 【默认色，也就是终端设置的默认显示颜色】<br>30 【黑色】<br>31 【红色】<br>32 【绿色】<br>33 【黄色】<br>34 【蓝色】<br>35 【紫红色】<br>36 【青蓝色】<br>37 【白色】</p>
-<p>把颜色状态设置的语句放在具体的显示内容前面即可让该内容以该颜色和状态显示</p>
-
       
     </div>
     
@@ -490,6 +406,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/21/ubuntu终端配色修改/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -648,13 +568,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="添加文件">添加文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add</span><br></pre></td></tr></table></figure>
-<h2 id="提交更新">提交更新</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
-<h2 id="查看状态">查看状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-<h2 id="添加远程仓库">添加远程仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin &lt;repo url&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="获取远程仓库内容">获取远程仓库内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin &lt;branch&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="把本地内容推送到远程仓库">把本地内容推送到远程仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;branch&gt;</span><br></pre></td></tr></table></figure>
-
+        <p>主要用来记录一些常用的git命令<br>
       
     </div>
     
@@ -667,6 +581,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/15/git常用命令/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -708,14 +626,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="程序安装和卸载命令">程序安装和卸载命令</h2><h3 id="程序安装命令">程序安装命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install [program name]</span><br></pre></td></tr></table></figure>
-<h3 id="程序卸载命令">程序卸载命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remomve [program name]</span><br></pre></td></tr></table></figure>
-<h2 id="压缩和解压缩文件命令">压缩和解压缩文件命令</h2><h3 id="解压缩tar-gz文件">解压缩tar.gz文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf [filename]</span><br></pre></td></tr></table></figure>
-<p>-C &lt;路径名&gt; 解压到指定路径</p>
-<h2 id="查询程序所在目录命令">查询程序所在目录命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">which</span> [program name]</span><br></pre></td></tr></table></figure>
-<h2 id="修改文件所属用户和组">修改文件所属用户和组</h2><h3 id="修改文件所属用户">修改文件所属用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown &lt;username&gt; &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改文件所属组">修改文件所属组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chgrp &lt;groupname&gt; &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
+        <p>主要用来记录常用的shell命令<br>
       
     </div>
     
@@ -728,6 +639,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/15/ubuntu下常用shell命令/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -827,10 +742,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="为文章添加多个标签">为文章添加多个标签</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tags: [tags1,tags2,...]</span><br></pre></td></tr></table></figure>
-<p>【注意】tags:后有个空格</p>
-<h2 id="代码高亮显示">代码高亮显示</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[```bash]</span><br><span class="line">需要高亮显示的部分</span><br><span class="line">[```]</span><br></pre></td></tr></table></figure>
-
+        <p>主要用来记录常用的Markdown语法<br>
       
     </div>
     
@@ -843,6 +755,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/15/Markdown常用语法/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

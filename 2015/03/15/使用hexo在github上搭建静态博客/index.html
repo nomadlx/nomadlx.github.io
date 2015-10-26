@@ -5,16 +5,19 @@
   
   <title>使用hexo在github上搭建静态博客 | nomadlx的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。">
+  <meta name="description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。
+【注意】本文假设在各位的电脑上已经安装了git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用hexo在github上搭建静态博客">
 <meta property="og:url" content="nomadlx.github.io/2015/03/15/使用hexo在github上搭建静态博客/index.html">
 <meta property="og:site_name" content="nomadlx的博客">
-<meta property="og:description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。">
-<meta property="og:updated_time" content="2015-10-08T17:54:28.714Z">
+<meta property="og:description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。
+【注意】本文假设在各位的电脑上已经安装了git">
+<meta property="og:updated_time" content="2015-10-26T11:13:52.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo在github上搭建静态博客">
-<meta name="twitter:description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。">
+<meta name="twitter:description" content="之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。
+【注意】本文假设在各位的电脑上已经安装了git">
   
     <link rel="alternative" href="/atom.xml" title="nomadlx的博客" type="application/atom+xml">
   
@@ -229,8 +232,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。</p>
-<a id="more"></a>
-<p>【注意】本文假设在各位的电脑上已经安装了git</p>
+<p>【注意】本文假设在各位的电脑上已经安装了git<br><a id="more"></a></p>
 <h2 id="安装Nodejs">安装Nodejs</h2><h3 id="在安装Nodejs之前需要借助nvm来进行安装，因此这里先进行nvm的安装">在安装Nodejs之前需要借助nvm来进行安装，因此这里先进行nvm的安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">24.0</span>/install.sh | bash</span><br></pre></td></tr></table></figure>
 <h3 id="安装完nvm之后，可以使用nvm来方便地进行Nodejs的安装">安装完nvm之后，可以使用nvm来方便地进行Nodejs的安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
 <p>###<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm <span class="built_in">alias</span> default <span class="number">0.12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure></p>
