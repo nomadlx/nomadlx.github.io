@@ -15,7 +15,7 @@
 <meta property="og:description" content="其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：
 
 如果你做的一件事情是一帆">
-<meta property="og:updated_time" content="2015-10-26T11:06:46.377Z">
+<meta property="og:updated_time" content="2015-10-26T11:07:32.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop2.6.0单机伪分布式安装和配置">
 <meta name="twitter:description" content="其实在一年前我就安装过hadoop，不过那时候就是照着教程安装的单机版，这次的安装过程虽然遇到了很多问题，并且很多问题的发生其实都是由于自己对linux系统下shell命令的不熟悉造成的，而且由于之前的电脑是中文版，想了想可以锻炼自己的英文水平就硬着头皮重装了纯英文版，之后又配了一次。虽然在这次配的过程还是遇到了一些问题，不过也更了解了细节上的操作，而且悟出了一个道理：
@@ -238,7 +238,6 @@
 <blockquote>
 <p>如果你做的一件事情是一帆风顺的，那它便可有可无。</p>
 </blockquote>
-<hr>
 <h2 id="添加hadoop用户">添加hadoop用户</h2><h3 id="添加hadoop-group组">添加hadoop-group组</h3><p>使用下面命令添加一个hadoop组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ addgroup hadoop-group</span><br></pre></td></tr></table></figure></p>
 <p>操作成功后会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Adding group `hadoop-group<span class="string">' (GID 1001) ...</span><br><span class="line">Done...</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="添加hadoop用户并加入hadoop-group组">添加hadoop用户并加入hadoop-group组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser --ingroup hadoop-group hadoop</span><br></pre></td></tr></table></figure>

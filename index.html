@@ -535,7 +535,6 @@
 <blockquote>
 <p>如果你做的一件事情是一帆风顺的，那它便可有可无。</p>
 </blockquote>
-<hr>
 <h2 id="添加hadoop用户">添加hadoop用户</h2><h3 id="添加hadoop-group组">添加hadoop-group组</h3><p>使用下面命令添加一个hadoop组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ addgroup hadoop-group</span><br></pre></td></tr></table></figure></p>
 <p>操作成功后会显示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Adding group `hadoop-group<span class="string">' (GID 1001) ...</span><br><span class="line">Done...</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="添加hadoop用户并加入hadoop-group组">添加hadoop用户并加入hadoop-group组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser --ingroup hadoop-group hadoop</span><br></pre></td></tr></table></figure>
