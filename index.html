@@ -112,7 +112,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/issue/" style="font-size: 15px;">issue</a> <a href="/tags/manual/" style="font-size: 20px;">manual</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/sublime/" style="font-size: 15px;">sublime</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+						<a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/issue/" style="font-size: 15px;">issue</a> <a href="/tags/manual/" style="font-size: 20px;">manual</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/sublime/" style="font-size: 15px;">sublime</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/漫谈/" style="font-size: 10px;">漫谈</a>
 					</div>
 				</section>
 				
@@ -191,6 +191,71 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-对同步-异步的理解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/26/对同步-异步的理解/" class="article-date">
+  	<time datetime="2015-10-26T10:54:32.000Z" itemprop="datePublished">2015-10-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/26/对同步-异步的理解/">对同步/异步的理解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>同步/异步执行可以用在的地方为 <strong>该部分任务的完成主体和该线程的完成主体不一样</strong> ，什么意思呢，我举两个经常用异步的例子：</p>
+<ol>
+<li><strong>读取文件：</strong>读取文件的实质是将在硬盘上的数据复制到内存里，而这一操作的执行者并不是cpu，而是磁盘控制器。</li>
+<li><strong>发送http请求：</strong>当线程执行发送请求之后，就是网络里的传输问题了，并不需要cpu的操作。<br>所以存在异步/同步调用的地方，<em>本身该任务的完成就不是该线程来做的</em>。<br>所谓的同步，不过就是 <em>不做事在这里等该任务处理完成</em>。</li>
+</ol>
+<p>更形象点的说法：<br>假设cpu是一个人，I/O控制器也是一个人，所谓的线程的调度等同于一个人处理多个任务，而异步/同步调用是一个人（cpu）命令另一个人（I/O控制器）去做一件事。</p>
+<ul>
+<li>在异步的情况下：我（cpu）并不等那个人（I/O控制器）完成任务才处理后面的事情，而是一分配完任务就干自己的其他事情了；</li>
+<li>在同步的情况下：我（cpu）就在这里等到那个人（I/O控制器）处理完我分配的任务，然后才干后面的事情。</li>
+</ul>
+<p><a href="http://www.zhihu.com/question/36786066/answer/69360466" target="_blank" rel="external">来自我的知乎回答</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漫谈/">漫谈</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Error-loading-syntax-file-Unable-to-open-Packages-Markdown-Markdown-tmLanguage" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -833,64 +898,10 @@
 
 
   
-    <article id="post-使用hexo在github上搭建静态博客" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/03/15/使用hexo在github上搭建静态博客/" class="article-date">
-  	<time datetime="2015-03-15T02:29:00.000Z" itemprop="datePublished">2015-03-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/15/使用hexo在github上搭建静态博客/">使用hexo在github上搭建静态博客</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前是在windows下进行搭建，但是deploy一直没有成功；现在转战到ubuntu下，虽然过程没有windows下面那么顺利，遇到了很多“莫名其妙”的问题，但是也让整个流程变得比较清晰，而不只是照葫芦画瓢，下面就是在ubuntu14.04下的整个使用hexo在github上搭建静态博客的流程。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/03/15/使用hexo在github上搭建静态博客/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
